@@ -151,14 +151,23 @@ return {
             { "<leader>vh", function() require("snacks").picker.help() end, desc = "Help Pages" },
         }
     },
-    -- NOTE: todo comments w/ snacks
+    -- NOTE: todo comments w/ snacks    
     {
+      "folke/snacks.nvim",
+      priority = 1000, -- lower than todo-comments
+      dependencies = {
+        "nvim-lua/plenary.nvim",
         "folke/todo-comments.nvim",
-        event = { "BufReadPre", "BufNewFile" },
-        optional = true,
-        keys = {
-            { "<leader>pt", function() require("snacks").picker.todo_comments() end, desc = "Todo" },
-            { "<leader>pT", function() require("snacks").picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } }) end, desc = "Todo/Fix/Fixme" },
-        },
+      },
+      opts = {},
+      keys = {
+        {
+          "<leader>pt",
+          function()
+            require("snacks").picker.todo_comments()
+          end,
+          desc = "Show all TODOs",
+        }
+      }
     }
 }
